@@ -2,15 +2,20 @@ const params = new URLSearchParams(window.location.search);
 const songId = params.get("song");
 
 const playerDiv = document.getElementById("player");
+playerDiv.innerHTML = ""; // IMPORTANT: neteja abans
 
 if (songId) {
-  playerDiv.innerHTML = `
-    <div class="player-wrapper">
-      <iframe
-        src="https://open.spotify.com/embed/track/${songId}?theme=0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-      </iframe>
-      <div class="overlay"></div>
-    </div>
-  `;
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://open.spotify.com/embed/track/${songId}?theme=0`;
+  iframe.width = "300";
+  iframe.height = "80";
+  iframe.frameBorder = "0";
+  iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+  iframe.allow =
+    "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+
+  document.getElementById("player").appendChild(iframe);
+} else {
+  document.body.innerHTML = "<p>No s'ha trobat cap cançó 🎧</p>";
+  playerDiv.appendChild(iframe);
 }
