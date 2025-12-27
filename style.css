@@ -1,8 +1,14 @@
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000;
+.spotify-container {
+  position: relative;
+  width: 300px;
+  height: 380px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 120px; /* ajusta segons què vulguis tapar */
+  background-color: black; /* o transparent amb blur */
+  z-index: 10;
 }
