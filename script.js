@@ -1,15 +1,17 @@
 const params = new URLSearchParams(window.location.search);
-fetch("songs.json")
-  .then(response => response.json())
-  .then(data => {
-    const songId = data.song_id;
+const songId = params.get("song");
 
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://open.spotify.com/embed/track/${songId}?utm_source=generator&theme=0`;
-    iframe.width = "300";
-    iframe.height = "80";
-    iframe.frameBorder = "0";
-    iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+const playerDiv = document.getElementById("player");
 
-    document.getElementById("player").appendChild(iframe);
-  });
+if (songId) {
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://open.spotify.com/embed/track/${songId}?theme=0`;
+  iframe.width = "300";
+  iframe.height = "80";
+  iframe.frameBorder = "0";
+  iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+
+  playerDiv.appendChild(iframe);
+} else {
+  playerDiv.innerHTML = "<p style='color:white'>Escaneja un QR 🎧</p>";
+}
